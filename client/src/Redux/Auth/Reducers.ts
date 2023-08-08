@@ -1,16 +1,15 @@
 import * as types from "./Types";
 import axios from "axios";
+import {URL} from "../index"
+import { Dispatch } from "redux";
 
 //login user
-export const NurseLogin = (data) => async (dispatch) => {
+export const NurseLogin = (data: string) => async (dispatch: Dispatch) => {
   try {
-    dispatch({ type: types.LOGIN_NURSE_REQUEST });
-    const res = await axios.post(
-      "https://zany-gray-clam-gear.cyclic.app/nurses/login",
-      data
-    );
+    dispatch({ type: types.LOGIN_USER_REQUEST });
+    const res = await axios.post(`${URL}/login`, data);
     dispatch({
-      type: types.LOGIN_NURSE_SUCCESS,
+      type: types.LOGIN_USER_SUCCESS,
       payload: {
         message: res.data.message,
         user: res.data.user,
@@ -20,7 +19,7 @@ export const NurseLogin = (data) => async (dispatch) => {
     return res.data;
   } catch (error) {
     dispatch({
-      type: types.LOGIN_NURSE_ERROR,
+      type: types.LOGIN_USER_ERROR,
       payload: {
         message: error,
       },
@@ -29,14 +28,14 @@ export const NurseLogin = (data) => async (dispatch) => {
 };
 
 // REGISTER NURSE
-export const UserRegister = (data) => async (dispatch) => {
+export const UserRegister = (data: string) => async (dispatch: Dispatch) => {
   try {
-    dispatch({ type: types.REGISTER_NURSE_REQUEST });
+    dispatch({ type: types.LOGIN_USER_REQUEST });
     const res = await axios.post(
-      "https://zany-gray-clam-gear.cyclic.app/nurses/register",
+      `{URL}/signup`,
       data
     );
-    // console.log(res);
+    console.log(res);
     return res.data;
     // dispatch({
     //   type: types.REGISTER_NURSE_SUCCESS,
@@ -49,7 +48,7 @@ export const UserRegister = (data) => async (dispatch) => {
     // });
   } catch (error) {
     dispatch({
-      type: types.REGISTER_NURSE_ERROR,
+      type: types.LOGIN_USER_ERROR,
       payload: {
         message: error,
       },
