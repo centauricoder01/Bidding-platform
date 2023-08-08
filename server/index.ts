@@ -16,8 +16,6 @@ app.get("/", (req, res) => {
   res.send("Welcome Back sir Ji");
 });
 
-// ADDING EXRTA LAYER OF AUTHTICATION
-
 // DATABASE CONNECTION START FROM HERE
 
 const mongoURL: string = process.env.MONGO_URL || "Default_URl";
@@ -31,6 +29,4 @@ mongoose
     console.log(err);
   });
 
-app.listen(8080, () =>
-  console.log(`Server started on ${process.env.PORT}`)
-);
+app.listen(8080, () => console.log(`Server started on ${process.env.PORT}`));
