@@ -12,7 +12,7 @@ const SignupUser = async (req: Request, res: Response) => {
     const findOneEmail = await UserModel.findOne({ email });
 
     if (findOneEmail) {
-      return res.status(409).send({
+      return res.send({
         message: "User Already Exist please enter new Email...",
       });
     }
@@ -27,7 +27,6 @@ const SignupUser = async (req: Request, res: Response) => {
           password: hash,
         });
 
-        console.log("This is New User", newUser);
         try {
           let ReturnedUser = await newUser.save();
           let token = jwt.sign(
@@ -59,7 +58,7 @@ const LoginUser = async (req: Request, res: Response) => {
   try {
     let findUser = await UserModel.findOne({ email });
     if (findUser) {
-      await bcrypt.compare(password, findUser.password, function (err, result) {
+   bcrypt.compare(password, findUser.password, function (err, result) {
         if (!result) {
           return res.send({ message: "Wrong Password" });
         } else {

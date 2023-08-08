@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/signup", SignupUser);
-app.get("/login", LoginUser);
+app.post("/login", LoginUser);
 
 // DATABASE CONNECTION START FROM HERE
 

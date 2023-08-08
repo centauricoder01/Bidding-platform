@@ -8,41 +8,23 @@ import {
     MenuList,
     MenuItem,
     MenuDivider,
-    useDisclosure,
     useColorModeValue,
     Stack,
     Center,
     useColorMode
 } from '@chakra-ui/react'
 import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs"
+import { useSelector } from 'react-redux';
 
-interface Props {
-    children: React.ReactNode
-}
 
-const Links = ['Dashboard', 'Projects', 'Team']
-
-const NavLink = (props: Props) => {
-    const { children } = props
-    return (
-        <Box
-            as="a"
-            px={2}
-            py={1}
-            rounded={'md'}
-            _hover={{
-                textDecoration: 'none',
-                bg: useColorModeValue('gray.200', 'gray.700'),
-            }}
-            href={'#'}>
-            {children}
-        </Box>
-    )
-}
 
 export default function Navbar() {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const { colorMode, toggleColorMode } = useColorMode()
+    const { colorMode, toggleColorMode } = useColorMode();
+
+    //@ts-ignore
+    const UserDetails = useSelector(state => state.Auth);
+
+    console.log(UserDetails)
 
     return (
         <>

@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
     res.send("Welcome Back sir Ji");
 });
 app.post("/signup", AuthUser_1.SignupUser);
-app.get("/login", AuthUser_1.LoginUser);
+app.post("/login", AuthUser_1.LoginUser);
 // DATABASE CONNECTION START FROM HERE
 const mongoURL = process.env.MONGO_URL || "Default_URl";
 mongoose_1.default

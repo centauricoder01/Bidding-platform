@@ -22,7 +22,7 @@ const SignupUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const { name, email, password } = req.body;
         const findOneEmail = yield SignupModel_1.UserModel.findOne({ email });
         if (findOneEmail) {
-            return res.status(409).send({
+            return res.send({
                 message: "User Already Exist please enter new Email...",
             });
         }
@@ -36,7 +36,6 @@ const SignupUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                         email,
                         password: hash,
                     });
-                    console.log("This is New User", newUser);
                     try {
                         let ReturnedUser = yield newUser.save();
                         let token = jsonwebtoken_1.default.sign({
@@ -66,7 +65,7 @@ const LoginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let findUser = yield SignupModel_1.UserModel.findOne({ email });
         if (findUser) {
-            yield bcrypt_1.default.compare(password, findUser.password, function (err, result) {
+            bcrypt_1.default.compare(password, findUser.password, function (err, result) {
                 if (!result) {
                     return res.send({ message: "Wrong Password" });
                 }

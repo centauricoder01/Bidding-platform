@@ -10,6 +10,7 @@ import {
     useColorModeValue,
     createIcon,
 } from '@chakra-ui/react'
+import { Link } from "react-router-dom"
 
 const Home = () => {
     return (
@@ -40,19 +41,19 @@ const Home = () => {
                         align={'center'}
                         alignSelf={'center'}
                         position={'relative'}>
-                        <Button
-                            colorScheme={'green'}
-                            bg={'green.400'}
-                            rounded={'full'}
-                            px={6}
-                            _hover={{
-                                bg: 'green.500',
-                            }}>
-                            Get Started
-                        </Button>
-                        <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
-                            Learn more
-                        </Button>
+                        <Link to={"/signup"}>
+                            <Button
+                                colorScheme={'green'}
+                                bg={'green.400'}
+                                rounded={'full'}
+                                px={6}
+                                _hover={{
+                                    bg: 'green.500',
+                                }}>
+                                Get Started
+                            </Button>
+                        </Link>
+
                         <Box>
                             <Icon
                                 as={Arrow}
