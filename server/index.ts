@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import { SignupUser, LoginUser } from "./Controllers/Auth/AuthUser";
 
 // ENDPOINT CONTROLLER ARE IMPORT HERE
 
@@ -15,6 +16,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Welcome Back sir Ji");
 });
+
+app.post("/signup", SignupUser);
+app.get("/login", LoginUser);
 
 // DATABASE CONNECTION START FROM HERE
 
