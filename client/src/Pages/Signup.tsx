@@ -4,7 +4,7 @@ import "../CSS/Signup.css"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { useToast } from '@chakra-ui/react'
-import { SignUpFunc } from '../Store/ApiCalling';
+import { SignUpFunc } from '../Redux/ApiCalling';
 
 
 const Signup = () => {

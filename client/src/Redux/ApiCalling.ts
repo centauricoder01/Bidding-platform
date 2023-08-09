@@ -21,3 +21,12 @@ export const LoginFunc = async (data: loginObject) => {
   const res = await axios.post(`${URL}/login`, data);
   return res.data;
 };
+
+export const saveStateToLocalStorage = (state: any) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem("userState", serializedState);
+  } catch (error) {
+    console.error("Error saving state to localStorage:", error);
+  }
+};

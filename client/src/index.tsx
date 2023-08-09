@@ -5,7 +5,7 @@ import App from './App';
 import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter } from "react-router-dom"
 import { Provider } from "react-redux";
-import  store from "./Store/Store";
+import { store } from './Redux/Store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,3 +20,7 @@ root.render(
   </ChakraProvider>
 );
 
+// store.subscribe(() => {
+//   const currentState = store.getState();
+//   saveStateToLocalStorage(currentState);
+// });

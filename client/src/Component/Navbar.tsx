@@ -17,12 +17,11 @@ import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs"
 import { useSelector } from 'react-redux';
 
 
-
 export default function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
 
     //@ts-ignore
-    const UserDetails = useSelector(state => state.Auth);
+    const UserDetails = useSelector(state => state.auth);
 
     console.log(UserDetails)
 
