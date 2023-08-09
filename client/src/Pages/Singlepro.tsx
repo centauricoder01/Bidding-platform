@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Box,
     Center,
@@ -18,15 +18,67 @@ import {
     useDisclosure,
     Input,
 } from '@chakra-ui/react'
+import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { yourBid } from '../Redux/Bids/Action';
+
+
+
 
 const IMAGE =
     'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'
 
 //@ts-ignore
 export default function Singlepro({ image, title, desc, time, bids }) {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const dispatch = useDispatch();
+
     //@ts-ignore
     const finalRef = React.useRef(null)
+    const navigate = useNavigate();
+    const [getBidValue, setBidValue] = useState(100)
+    const toast = useToast();
+
+    //@ts-ignore
+    const RedirecttoSingleProductPage = () => {
+        let obj = {
+            image, title, desc, time, bids
+        }
+        localStorage.setItem("SingleProduct", JSON.stringify(obj));
+        navigate("/singlepro")
+    }
+
+    const HandleSubmit = () => {
+        let price = 100;
+        if (getBidValue < price) {
+            return toast({
+                title: "Bid cannot be less than Price",
+                status: "info",
+                duration: 3000,
+                isClosable: true,
+            });
+        }
+
+        let value = true;
+
+        for (let i = 0; i < bids.length; i++) {
+            if (getBidValue < bids.amount) {
+                value = false;
+                return;
+            }
+        }
+
+        let obj = {
+            userId: "64d37d8767ff154cd0bbecea", name: "Rajendra Patel", amount: 2000, productId: "64d3a3729ca5c126842d294f"
+        }
+
+        if (value) {
+            dispatch(yourBid())
+        }
+    }
+
+
     return (
         <>
             <Center py={12}>
@@ -83,7 +135,7 @@ export default function Singlepro({ image, title, desc, time, bids }) {
                         </Text>
                         <Stack display={"flex"} justifyContent={"space-between"} width={"100%"}>
                             <Button onClick={onOpen}>Bid</Button>
-                            <Button >View</Button>
+                            <Button onClick={RedirecttoSingleProductPage} >View</Button>
 
                         </Stack>
                     </Stack>
@@ -97,14 +149,15 @@ export default function Singlepro({ image, title, desc, time, bids }) {
                     <ModalHeader>Enter Your Bidding Amount</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Input placeholder='Amount' />
+                        {/* @ts-ignore */}
+                        <Input placeholder='Amount' value={getBidValue} type="number" onChange={(e: number) => setBidValue(e.target.value)} />
                     </ModalBody>
 
                     <ModalFooter>
                         <Button colorScheme='blue' mr={3} onClick={onClose}>
                             Close
                         </Button>
-                        <Button variant='ghost'>Submit</Button>
+                        <Button variant='ghost' onClick={HandleSubmit}>Submit</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

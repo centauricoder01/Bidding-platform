@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom"
 
 
+
 export default function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
 
@@ -76,8 +77,11 @@ export default function Navbar() {
                                         </Center>
                                         <br />
                                         <MenuDivider />
-                                        <MenuItem>Dashboard</MenuItem>
-                                        <MenuItem>Your Bids</MenuItem>
+                                        <Link to={"/dashboard"}><MenuItem>Dashboard</MenuItem></Link>
+                                        <MenuItem>Your Bids & Product</MenuItem>
+                                        <Link to={"/addprod"}>
+                                            <MenuItem>Add Product</MenuItem>
+                                        </Link>
                                         <MenuItem>Logout</MenuItem>
                                     </MenuList>
                                 </Menu> : <Link to={"/signup"}>

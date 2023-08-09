@@ -19,6 +19,7 @@ const Dashboard = () => {
     dispatch(GetAllBids())
     //@ts-ignore
     const parsedVal = JSON.parse(getLocalstorage)
+    
     parsedVal.AllBids !== undefined ? setGetBids(parsedVal.AllBids) : setGetBids([])
   }, [dispatch])
 

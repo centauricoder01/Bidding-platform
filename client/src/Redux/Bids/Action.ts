@@ -23,7 +23,7 @@ const GetAllBids = () => async (dispatch) => {
 };
 
 //@ts-ignore
-const AddProduct = (data) => (dispatch) => {
+const AddProduct = (data) =>async (dispatch) => {
   dispatch({ type: types.ADD_PRODUCT_REQUEST });
   return axios
     .post(`${URL}/addproduct`, data)
@@ -32,7 +32,7 @@ const AddProduct = (data) => (dispatch) => {
         type: types.ADD_PRODUCT_SUCCESS,
         payload: res.data,
       });
-      return res.data;
+      return (res.data);
     })
     .catch((e) => {
       dispatch({

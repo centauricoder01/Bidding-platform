@@ -16,6 +16,12 @@ import {
     IconProps,
     Icon,
 } from '@chakra-ui/react'
+import { useState } from 'react'
+import { AddProduct } from '../Redux/Bids/Action'
+import { useDispatch, useSelector } from "react-redux";
+import { useToast } from "@chakra-ui/react";
+import {useNavigate } from "react-router-dom";
+
 
 const avatars = [
     {
@@ -61,7 +67,72 @@ const Blur = (props: IconProps) => {
     )
 }
 
+//@ts-ignore
+const parsedVal = JSON.parse(localStorage.getItem("UserInfo"))
+
 export default function AddBid() {
+    const dispatch = useDispatch();
+    const toast = useToast();
+    const navigate = useNavigate();
+
+    const [formValues, setFormValues] = useState({
+        title: "",
+        desc: "",
+        image: "",
+        timeleft: 24,
+        userId: parsedVal.user._id || ""
+    });
+
+
+    //@ts-ignore
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormValues((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
+    };
+    //@ts-ignore
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if (formValues.desc === "" || formValues.image === "" || formValues.title === "") {
+            return toast({
+                title: "Please Enter all feilds",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            });
+        }
+        //@ts-ignore
+        dispatch(AddProduct(formValues)).then((res) => {
+
+            if (res.message === "Bid saved") {
+                toast({
+                    title: "Bidding start on Your Product",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true,
+                });
+                navigate("/");
+            } else if (res.message === "Wrong Password") {
+                toast({
+                    title: "Wrong Password",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                });
+            } else {
+                toast({
+                    title: "Server Error",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                });
+            }
+        });
+    };
+
     return (
         <Box position={'relative'}>
             <Container
@@ -146,49 +217,66 @@ export default function AddBid() {
                         <Heading
                             color={'gray.800'}
                             lineHeight={1.1}
-                            fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}>
-                            Join our team
+                            fontSize={{ base: 'xl', sm: '2xl', md: '3xl' }}>
+                            Join Our Bidding Community
                             <Text as={'span'} bgGradient="linear(to-r, red.400,pink.400)" bgClip="text">
                                 !
                             </Text>
                         </Heading>
-                        <Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
-                            We’re looking for amazing engineers just like you! Become a part of our
-                            rockstar engineering team and skyrocket your career!
-                        </Text>
+
                     </Stack>
-                    <Box as={'form'} mt={10}>
+                    <Box as={'form'} mt={3}>
                         <Stack spacing={4}>
                             <Input
-                                placeholder="Firstname"
+                                placeholder="Title"
                                 bg={'gray.100'}
                                 border={0}
                                 color={'gray.500'}
                                 _placeholder={{
                                     color: 'gray.500',
                                 }}
+                                name='title'
+                                value={formValues.title}
+                                onChange={handleChange}
                             />
                             <Input
-                                placeholder="firstname@lastname.io"
+                                placeholder="Desc"
                                 bg={'gray.100'}
                                 border={0}
                                 color={'gray.500'}
                                 _placeholder={{
                                     color: 'gray.500',
                                 }}
+                                name='desc'
+                                value={formValues.desc}
+                                onChange={handleChange}
                             />
                             <Input
-                                placeholder="+1 (___) __-___-___"
+                                placeholder="Img URL"
                                 bg={'gray.100'}
                                 border={0}
                                 color={'gray.500'}
                                 _placeholder={{
                                     color: 'gray.500',
                                 }}
+                                name='image'
+                                value={formValues.image}
+                                onChange={handleChange}
                             />
-                            <Button fontFamily={'heading'} bg={'gray.200'} color={'gray.800'}>
-                                Upload CV
-                            </Button>
+                            <Input
+                                placeholder="Duration in HRS"
+                                bg={'gray.100'}
+                                border={0}
+                                color={'gray.500'}
+                                _placeholder={{
+                                    color: 'gray.500',
+                                }}
+                                type="number"
+                                name='timeleft'
+                                value={formValues.timeleft}
+                                onChange={handleChange}
+                            />
+
                         </Stack>
                         <Button
                             fontFamily={'heading'}
@@ -199,7 +287,8 @@ export default function AddBid() {
                             _hover={{
                                 bgGradient: 'linear(to-r, red.400,pink.400)',
                                 boxShadow: 'xl',
-                            }}>
+                            }}
+                            onClick={handleSubmit}>
                             Submit
                         </Button>
                     </Box>
