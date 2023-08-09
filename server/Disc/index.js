@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const AuthUser_1 = require("./Controllers/Auth/AuthUser");
+const Bids_1 = require("./Controllers/Bids/Bids");
 // ENDPOINT CONTROLLER ARE IMPORT HERE
 // MIDDLEWARE START FROM HERE
 const app = (0, express_1.default)();
@@ -19,6 +20,10 @@ app.get("/", (req, res) => {
 });
 app.post("/signup", AuthUser_1.SignupUser);
 app.post("/login", AuthUser_1.LoginUser);
+app.post("/addproduct", Bids_1.addProduct);
+app.get("/getbids", Bids_1.GetAllBid);
+app.post("/yourproduct", Bids_1.UserProductBid);
+app.post("/addbid", Bids_1.CreateBid);
 // DATABASE CONNECTION START FROM HERE
 const mongoURL = process.env.MONGO_URL || "Default_URl";
 mongoose_1.default

@@ -14,11 +14,17 @@ const reqNumber = {
     required: true,
 };
 const BidsSchema = new mongoose_1.default.Schema({
-    userbid: reqString,
+    userId: reqString,
     title: reqString,
     desc: reqString,
     image: reqString,
-    bids: [],
+    bids: [
+        {
+            name: reqString,
+            amount: reqNumber,
+            userId: reqString,
+        },
+    ],
     timeleft: reqNumber,
 }, {
     timestamps: true,

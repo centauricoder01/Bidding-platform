@@ -2,6 +2,12 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import { SignupUser, LoginUser } from "./Controllers/Auth/AuthUser";
+import {
+  addProduct,
+  CreateBid,
+  GetAllBid,
+  UserProductBid,
+} from "./Controllers/Bids/Bids";
 
 // ENDPOINT CONTROLLER ARE IMPORT HERE
 
@@ -19,6 +25,10 @@ app.get("/", (req, res) => {
 
 app.post("/signup", SignupUser);
 app.post("/login", LoginUser);
+app.post("/addproduct", addProduct);
+app.get("/getbids", GetAllBid);
+app.post("/yourproduct", UserProductBid);
+app.post("/addbid", CreateBid);
 
 // DATABASE CONNECTION START FROM HERE
 

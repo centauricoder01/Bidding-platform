@@ -19,8 +19,3 @@ root.render(
     </Provider>
   </ChakraProvider>
 );
-
-// store.subscribe(() => {
-//   const currentState = store.getState();
-//   saveStateToLocalStorage(currentState);
-// });

@@ -12,11 +12,17 @@ const reqNumber = {
 
 const BidsSchema = new mongoose.Schema(
   {
-    userbid: reqString,
+    userId: reqString,
     title: reqString,
     desc: reqString,
     image: reqString,
-    bids: [],
+    bids: [
+      {
+        name: reqString,
+        amount: reqNumber,
+        userId: reqString,
+      },
+    ],
     timeleft: reqNumber,
   },
   {
