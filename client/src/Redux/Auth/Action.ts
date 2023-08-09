@@ -12,8 +12,9 @@ const LoginUser = (data) => (dispatch) => {
         type: types.USER_LOGIN_SUCCESS,
         payload: res.data,
       });
-      
+      return res.data;
     })
+
     .catch((e) => {
       dispatch({
         type: types.USER_LOGIN_FAILURE,
@@ -21,8 +22,6 @@ const LoginUser = (data) => (dispatch) => {
       });
     });
 };
-
-
 
 //@ts-ignore
 const SignupUser = (data) => (dispatch) => {
@@ -30,7 +29,7 @@ const SignupUser = (data) => (dispatch) => {
   return axios
     .post(`${URL}/signup`, data)
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
     .catch((e) => {
       dispatch({
@@ -40,4 +39,4 @@ const SignupUser = (data) => (dispatch) => {
     });
 };
 
-export {SignupUser , LoginUser}
+export { SignupUser, LoginUser };

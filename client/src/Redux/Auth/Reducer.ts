@@ -19,7 +19,6 @@ const reducer = (state = initialState, action) => {
       };
     case types.USER_LOGIN_SUCCESS:
       localStorage.setItem("UserInfo", JSON.stringify(payload));
-      localStorage.setItem("IsAutication", "true");
       return {
         ...state,
         loading: false,

@@ -25,15 +25,13 @@ const Home = () => {
                         fontWeight={600}
                         fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
                         lineHeight={'110%'}>
-                        Make money from <br />
+                        Unlocking Value Through <br />
                         <Text as={'span'} color={'green.400'}>
-                            your audience
+                            Competitive Bidding
                         </Text>
                     </Heading>
                     <Text color={'gray.500'}>
-                        Monetize your content by charging your most loyal readers and reward them
-                        loyalty points. Give back to your loyal readers by granting them access to
-                        your pre-releases and sneak-peaks.
+                        Experience the thrill of bidding and seize opportunities to secure sought-after items at the best prices. Our platform empowers you with the excitement of competition and the satisfaction of winning, all while enjoying the benefits of cost-effective deals.
                     </Text>
                     <Stack
                         direction={'column'}
@@ -70,7 +68,7 @@ const Home = () => {
                                 right={'-125px'}
                                 top={'-15px'}
                                 transform={'rotate(10deg)'}>
-                                Starting at $15/mo
+                                Starting at $0/mo
                             </Text>
                         </Box>
                     </Stack>

@@ -7,21 +7,18 @@ import { useToast } from "@chakra-ui/react";
 import { LoginUser } from "../Redux/Auth/Action";
 
 const Login = () => {
-  // const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
-  // @ts-ignore
-  const { isAuthtication, User, loading, error } = useSelector(
-    (store) => store.authReducer
-  );
 
-  // const toast = useToast()
-  // const navigate = useNavigate();
+  const toast = useToast();
+  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
   });
 
+
+  //@ts-ignore
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues((prevValues) => ({
@@ -29,11 +26,38 @@ const Login = () => {
       [name]: value,
     }));
   };
-
+  //@ts-ignore
   const handleSubmit = (event) => {
     event.preventDefault();
+
     //@ts-ignore
-    dispatch(LoginUser(formValues));
+    dispatch(LoginUser(formValues)).then((res) => {
+
+
+      if (res.message === "User Login Successful") {
+        toast({
+          title: "User Login Successful",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        navigate("/");
+      } else if (res.message === "Wrong Password") {
+        toast({
+          title: "Wrong Password",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Server Error",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    });
   };
 
   return (

@@ -36,9 +36,32 @@ const Signup = () => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        console.log(formValues, "FORMVALURES")
         SignUpFunc(formValues).then((res) => {
-            console.log(res)
+            if (res.message === "Signup Successfull") {
+                toast({
+                    title: 'Signup Successfull',
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                })
+                navigate("/login")
+            }
+            else if (res.message === "User Already Exist please enter new Email...") {
+                toast({
+                    title: 'Email Already Registered',
+                    status: "info",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
+            else {
+                toast({
+                    title: 'Server Error',
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
         })
     };
 
