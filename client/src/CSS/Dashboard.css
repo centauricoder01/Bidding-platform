@@ -1,5 +1,4 @@
 .main-dashboard-div{
-    border: 1px solid red;
     display: flex;
     flex-wrap: wrap;
     width: 90%;
@@ -8,6 +7,5 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    margin-top: 2rem;
     margin-bottom: 2rem;
 }

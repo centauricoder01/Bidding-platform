@@ -15,7 +15,7 @@ const addProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const newUser = new BidsModel_1.BidsModel(req.body);
         yield newUser.save();
-        res.status(400).send({ message: "Bid saved" });
+        res.status(200).send({ message: "Bid saved" });
     }
     catch (error) {
         res.status(500).send({ message: "Server Error", error });
@@ -25,7 +25,7 @@ exports.addProduct = addProduct;
 const GetAllBid = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const AllBids = yield BidsModel_1.BidsModel.find({});
-        res.status(400).send({ message: "All Bids", AllBids });
+        res.status(200).send({ message: "All Bids", AllBids });
     }
     catch (error) {
         res.status(500).send({ message: "Server Error", error });
@@ -36,7 +36,7 @@ const UserProductBid = (req, res) => __awaiter(void 0, void 0, void 0, function*
     try {
         const { userId } = req.body;
         const yourBids = yield BidsModel_1.BidsModel.find({ userId });
-        res.status(400).send({ message: "Your Bids", yourBids });
+        res.status(200).send({ message: "Your Bids", yourBids });
     }
     catch (error) {
         res.status(500).send({ message: "server Error", error });
@@ -47,7 +47,7 @@ const CreateBid = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, amount, userId, productId } = req.body;
         const getProduct = yield BidsModel_1.BidsModel.updateOne({ _id: productId }, { $push: { bids: { name, amount, userId } } });
-        res.status(400).send({ message: "Bid Added", getProduct });
+        res.status(200).send({ message: "Bid Added", getProduct });
     }
     catch (error) {
         res.status(500).send({ message: "Server Error", error });
