@@ -36,12 +36,21 @@ const Signup = () => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+        if (formValues.name === "" || formValues.email === "" || formValues.password === "") {
+           return toast({
+                title: 'Please enter all details',
+                status: "error",
+                duration: 2000,
+                isClosable: true,
+            })
+        }
+        
         SignUpFunc(formValues).then((res) => {
             if (res.message === "Signup Successfull") {
                 toast({
                     title: 'Signup Successfull',
                     status: "success",
-                    duration: 5000,
+                    duration: 2000,
                     isClosable: true,
                 })
                 navigate("/login")

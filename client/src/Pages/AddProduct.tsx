@@ -17,10 +17,10 @@ import {
     Icon,
 } from '@chakra-ui/react'
 import { useState } from 'react'
-import { AddProduct } from '../Redux/Bids/Action'
+import { AddProduct, GetAllBids } from '../Redux/Bids/Action'
 import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const avatars = [
@@ -78,9 +78,10 @@ export default function AddBid() {
     const [formValues, setFormValues] = useState({
         title: "",
         desc: "",
+        price: "",
         image: "",
-        timeleft: 24,
-        userId: parsedVal.user._id || ""
+        timeleft: "",
+        userId: parsedVal?.user._id || ""
     });
 
 
@@ -96,7 +97,7 @@ export default function AddBid() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (formValues.desc === "" || formValues.image === "" || formValues.title === "") {
+        if (formValues.desc === "" || formValues.image === "" || formValues.title === "" || formValues.price === "" || formValues.timeleft === "") {
             return toast({
                 title: "Please Enter all feilds",
                 status: "error",
@@ -114,6 +115,8 @@ export default function AddBid() {
                     duration: 3000,
                     isClosable: true,
                 });
+                // @ts-ignore 
+                dispatch(GetAllBids())
                 navigate("/");
             } else if (res.message === "Wrong Password") {
                 toast({
@@ -261,6 +264,18 @@ export default function AddBid() {
                                 }}
                                 name='image'
                                 value={formValues.image}
+                                onChange={handleChange}
+                            />
+                            <Input
+                                placeholder="Price"
+                                bg={'gray.100'}
+                                border={0}
+                                color={'gray.500'}
+                                _placeholder={{
+                                    color: 'gray.500',
+                                }}
+                                name='price'
+                                value={formValues.price}
                                 onChange={handleChange}
                             />
                             <Input

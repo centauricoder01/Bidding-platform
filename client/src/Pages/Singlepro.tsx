@@ -18,7 +18,7 @@ import {
     useDisclosure,
     Input,
 } from '@chakra-ui/react'
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { yourBid } from '../Redux/Bids/Action';
@@ -30,7 +30,7 @@ const IMAGE =
     'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'
 
 //@ts-ignore
-export default function Singlepro({ image, title, desc, time, bids, productId }) {
+export default function Singlepro({ image, title, desc, time, bids, productId, price }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
 
@@ -54,7 +54,6 @@ export default function Singlepro({ image, title, desc, time, bids, productId })
 
     
     const HandleSubmit = () => {
-        let price = 100;
         if (getBidValue < price) {
             return toast({
                 title: "Bid cannot be less than Price",
@@ -70,9 +69,9 @@ export default function Singlepro({ image, title, desc, time, bids, productId })
                 value = false;
             }
         }
-        console.log(value)
+       
         let obj = {
-            userId: getuserId.user._id, name: getuserId.user.name, amount: getBidValue, productId: productId
+            userId: getuserId?.user._id, name: getuserId?.user.name, amount: getBidValue, productId: productId
         }
         if (!value) {
             return toast({
@@ -83,9 +82,16 @@ export default function Singlepro({ image, title, desc, time, bids, productId })
             });
         }
         else {
+            toast({
+                title: "Bid Added",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+            })
             // @ts-ignore
             dispatch(yourBid(obj));
             onClose();
+            window.location.reload()
         }
     }
 
@@ -142,7 +148,7 @@ export default function Singlepro({ image, title, desc, time, bids, productId })
                             {desc}
                         </Heading>
                         <Text fontWeight={800} fontSize={'xl'}>
-                            $57
+                            ₹{price}
                         </Text>
                         <Stack display={"flex"} justifyContent={"space-between"} width={"100%"}>
                             <Button onClick={onOpen}>Bid</Button>

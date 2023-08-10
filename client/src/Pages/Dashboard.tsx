@@ -22,9 +22,12 @@ const Dashboard = () => {
 
     parsedVal?.AllBids !== undefined ? setGetBids(parsedVal?.AllBids) : setGetBids([])
     console.log(parsedVal);
-  }, [dispatch])
+  }, [dispatch, getLocalstorage])
+
 
   return (
+
+    
     <>
       <Text fontWeight={800} fontSize={'xl'} textAlign={"center"} mt={"5"}>
         Make Your First Bid Now
@@ -34,7 +37,7 @@ const Dashboard = () => {
         {
           getBid.map((ele) => (
             //@ts-ignore
-            <Singlepro image={ele.image} title={ele.title} desc={ele.desc} time={ele.timeleft} bids={ele.bids} productId={ele._id} />
+            <Singlepro key={ele._id} image={ele.image} title={ele.title} desc={ele.desc} time={ele.timeleft} bids={ele.bids} productId={ele._id} price={ele.price} />
           ))
         }
       </div>

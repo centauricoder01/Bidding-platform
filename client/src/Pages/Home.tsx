@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Box,
     Heading,
@@ -12,7 +12,15 @@ import {
 } from '@chakra-ui/react'
 import { Link } from "react-router-dom"
 
+
+
 const Home = () => {
+
+    const [localstrval, setlocalstrval] = useState(false);
+    useEffect(()=>{
+        let localstorageValue = localStorage.getItem("UserInfo");
+        localstorageValue !== null ? setlocalstrval(true) : setlocalstrval(false)
+    },[])
     return (
         <>
             <Container maxW={'3xl'}>
@@ -39,18 +47,31 @@ const Home = () => {
                         align={'center'}
                         alignSelf={'center'}
                         position={'relative'}>
-                        <Link to={"/signup"}>
-                            <Button
-                                colorScheme={'green'}
-                                bg={'green.400'}
-                                rounded={'full'}
-                                px={6}
-                                _hover={{
-                                    bg: 'green.500',
-                                }}>
-                                Get Started
-                            </Button>
-                        </Link>
+                        {
+                            localstrval ? <Link to={"/dashboard"}>
+                                <Button
+                                    colorScheme={'green'}
+                                    bg={'green.400'}
+                                    rounded={'full'}
+                                    px={6}
+                                    _hover={{
+                                        bg: 'green.500',
+                                    }}>
+                                    Checkout Product
+                                </Button>
+                            </Link> : <Link to={"/signup"}>
+                                <Button
+                                    colorScheme={'green'}
+                                    bg={'green.400'}
+                                    rounded={'full'}
+                                    px={6}
+                                    _hover={{
+                                        bg: 'green.500',
+                                    }}>
+                                    Get Started
+                                </Button>
+                            </Link>
+                        }
 
                         <Box>
                             <Icon

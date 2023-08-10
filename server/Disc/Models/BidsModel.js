@@ -18,6 +18,7 @@ const BidsSchema = new mongoose_1.default.Schema({
     title: reqString,
     desc: reqString,
     image: reqString,
+    price: reqNumber,
     bids: [
         {
             name: reqString,

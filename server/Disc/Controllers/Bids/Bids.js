@@ -35,7 +35,6 @@ exports.GetAllBid = GetAllBid;
 const UserProductBid = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.body;
-        console.log(userId, "This is UserID");
         const yourBids = yield BidsModel_1.BidsModel.find({ userId });
         res.status(200).send({ message: "Your Bids", yourBids });
     }

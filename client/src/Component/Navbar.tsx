@@ -29,7 +29,7 @@ export default function Navbar() {
     const [localstrval, setlocalstrval] = useState(false);
     const [username, setusername] = useState("")
 
-    useEffect(() => { 
+    useEffect(() => {
         let localstorageValue = localStorage.getItem("UserInfo");
         localstorageValue !== null ? setlocalstrval(true) : setlocalstrval(false)
         //@ts-ignore
@@ -84,13 +84,17 @@ export default function Navbar() {
                                         <Link to={"/addprod"}>
                                             <MenuItem>Add Product</MenuItem>
                                         </Link>
-                                        <MenuItem>Logout</MenuItem>
+                                        <Link to={"/"}>
+                                            <MenuItem onClick={() => {
+                                                window.localStorage.clear();
+                                                window.location.reload()
+                                            }} >Logout</MenuItem>
+                                        </Link>
                                     </MenuList>
                                 </Menu> : <Link to={"/signup"}>
                                     <Button>Signup</Button>
                                 </Link>
                             }
-
                         </Stack>
                     </Flex>
                 </Flex>
