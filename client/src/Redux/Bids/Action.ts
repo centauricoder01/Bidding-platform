@@ -12,7 +12,7 @@ const GetAllBids = () => async (dispatch) => {
         type: types.GET_BID_SUCCESS,
         payload: res.data,
       });
-      console.log(res.data);
+      
     })
     .catch((e) => {
       dispatch({
@@ -23,7 +23,7 @@ const GetAllBids = () => async (dispatch) => {
 };
 
 //@ts-ignore
-const AddProduct = (data) =>async (dispatch) => {
+const AddProduct = (data) => async (dispatch) => {
   dispatch({ type: types.ADD_PRODUCT_REQUEST });
   return axios
     .post(`${URL}/addproduct`, data)
@@ -32,7 +32,7 @@ const AddProduct = (data) =>async (dispatch) => {
         type: types.ADD_PRODUCT_SUCCESS,
         payload: res.data,
       });
-      return (res.data);
+      return res.data;
     })
     .catch((e) => {
       dispatch({
@@ -43,10 +43,11 @@ const AddProduct = (data) =>async (dispatch) => {
 };
 
 //@ts-ignore
-const yourProduct = (data) => (dispatch) => {
+const yourProduct = (value) => async (dispatch) => {
   dispatch({ type: types.GET_PRODUCT_REQUEST });
+
   return axios
-    .post(`${URL}/yourproduct`, data)
+    .post(`${URL}/yourproduct`, value)
     .then((res) => {
       dispatch({
         type: types.GET_PRODUCT_SUCCESS,
@@ -63,7 +64,7 @@ const yourProduct = (data) => (dispatch) => {
 };
 
 //@ts-ignore
-const yourBid = (data) => (dispatch) => {
+const yourBid = (data) => async (dispatch) => {
   dispatch({ type: types.YOUR_BID_REQUEST });
   return axios
     .post(`${URL}/addbid`, data)
@@ -72,7 +73,7 @@ const yourBid = (data) => (dispatch) => {
         type: types.YOUR_BID_SUCCESS,
         payload: res.data,
       });
-      return res.data;
+      return res.data
     })
     .catch((e) => {
       dispatch({

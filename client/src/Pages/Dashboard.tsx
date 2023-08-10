@@ -19,8 +19,9 @@ const Dashboard = () => {
     dispatch(GetAllBids())
     //@ts-ignore
     const parsedVal = JSON.parse(getLocalstorage)
-    
-    parsedVal.AllBids !== undefined ? setGetBids(parsedVal.AllBids) : setGetBids([])
+
+    parsedVal?.AllBids !== undefined ? setGetBids(parsedVal?.AllBids) : setGetBids([])
+    console.log(parsedVal);
   }, [dispatch])
 
   return (
@@ -32,8 +33,8 @@ const Dashboard = () => {
 
         {
           getBid.map((ele) => (
-                //@ts-ignore
-            <Singlepro image={ele.image} title={ele.title} desc={ele.desc} time={ele.timeleft} bids={ele.bids} />
+            //@ts-ignore
+            <Singlepro image={ele.image} title={ele.title} desc={ele.desc} time={ele.timeleft} bids={ele.bids} productId={ele._id} />
           ))
         }
       </div>

@@ -23,6 +23,7 @@ const GetAllBid = async (req: Request, res: Response) => {
 const UserProductBid = async (req: Request, res: Response) => {
   try {
     const { userId } = req.body;
+    console.log(userId, "This is UserID");
     const yourBids = await BidsModel.find({ userId });
     res.status(200).send({ message: "Your Bids", yourBids });
   } catch (error) {

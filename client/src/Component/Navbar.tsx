@@ -29,12 +29,12 @@ export default function Navbar() {
     const [localstrval, setlocalstrval] = useState(false);
     const [username, setusername] = useState("")
 
-    useEffect(() => {
+    useEffect(() => { 
         let localstorageValue = localStorage.getItem("UserInfo");
         localstorageValue !== null ? setlocalstrval(true) : setlocalstrval(false)
         //@ts-ignore
         let parsedVal = JSON.parse(localstorageValue);
-        parsedVal.user.name !== undefined ? setusername(parsedVal.user.name) : setusername("");
+        parsedVal?.user?.name !== null ? setusername(parsedVal?.user?.name) : setusername("");
 
     }, [value])
 
@@ -73,12 +73,14 @@ export default function Navbar() {
                                         </Center>
                                         <br />
                                         <Center>
-                                            <p>{username}</p>
+                                            <p>{username || "Raj"}</p>
                                         </Center>
                                         <br />
                                         <MenuDivider />
                                         <Link to={"/dashboard"}><MenuItem>Dashboard</MenuItem></Link>
-                                        <MenuItem>Your Bids & Product</MenuItem>
+                                        <Link to={"/bidsandprod"}>
+                                            <MenuItem>Your Bids & Product</MenuItem>
+                                        </Link>
                                         <Link to={"/addprod"}>
                                             <MenuItem>Add Product</MenuItem>
                                         </Link>

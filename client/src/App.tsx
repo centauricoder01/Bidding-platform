@@ -7,6 +7,7 @@ import Login from './Pages/Login';
 import Dashboard from './Pages/Dashboard';
 import AddProduct from './Pages/AddProduct';
 import SingleBid from './Pages/SingleBid';
+import YourBidAndProduct from './Pages/YourBidAndProduct';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         {/* @ts-ignore */}
         <Route path='/singlepro' element={<SingleBid />} />
         <Route path='/addprod' element={<AddProduct />} />
+        <Route path='/bidsandprod' element={<YourBidAndProduct />} />
       </Routes>
       <Footer />
     </>

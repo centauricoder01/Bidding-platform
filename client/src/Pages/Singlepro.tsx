@@ -30,7 +30,7 @@ const IMAGE =
     'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'
 
 //@ts-ignore
-export default function Singlepro({ image, title, desc, time, bids }) {
+export default function Singlepro({ image, title, desc, time, bids, productId }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
 
@@ -41,6 +41,9 @@ export default function Singlepro({ image, title, desc, time, bids }) {
     const toast = useToast();
 
     //@ts-ignore
+    const getuserId = JSON.parse(localStorage.getItem("UserInfo"));
+
+    //@ts-ignore
     const RedirecttoSingleProductPage = () => {
         let obj = {
             image, title, desc, time, bids
@@ -49,6 +52,7 @@ export default function Singlepro({ image, title, desc, time, bids }) {
         navigate("/singlepro")
     }
 
+    
     const HandleSubmit = () => {
         let price = 100;
         if (getBidValue < price) {
@@ -61,20 +65,27 @@ export default function Singlepro({ image, title, desc, time, bids }) {
         }
 
         let value = true;
-
         for (let i = 0; i < bids.length; i++) {
-            if (getBidValue < bids.amount) {
+            if (getBidValue < bids[i].amount) {
                 value = false;
-                return;
             }
         }
-
+        console.log(value)
         let obj = {
-            userId: "64d37d8767ff154cd0bbecea", name: "Rajendra Patel", amount: 2000, productId: "64d3a3729ca5c126842d294f"
+            userId: getuserId.user._id, name: getuserId.user.name, amount: getBidValue, productId: productId
         }
-
-        if (value) {
-            dispatch(yourBid())
+        if (!value) {
+            return toast({
+                title: "Bid cannot be less than Price last Bid",
+                status: "info",
+                duration: 3000,
+                isClosable: true,
+            });
+        }
+        else {
+            // @ts-ignore
+            dispatch(yourBid(obj));
+            onClose();
         }
     }
 
