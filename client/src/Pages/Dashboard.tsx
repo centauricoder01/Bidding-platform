@@ -11,7 +11,6 @@ const Dashboard = () => {
   //@ts-ignore
   const { bids } = useSelector(state => state.bidsReducer)
   const getLocalstorage = localStorage.getItem("Bids");
-
   const [getBid, setGetBids] = useState([])
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const Dashboard = () => {
     const parsedVal = JSON.parse(getLocalstorage)
 
     parsedVal?.AllBids !== undefined ? setGetBids(parsedVal?.AllBids) : setGetBids([])
-    console.log(parsedVal);
+    console.log(parsedVal, "Parsed Val");
   }, [dispatch, getLocalstorage])
 
 

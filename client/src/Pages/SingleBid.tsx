@@ -34,7 +34,7 @@ export default function SingleBid() {
           <Heading>Total Bids</Heading>
           <Stack>
             {
-              getlocalstorage.bids.length !== 0 ?  // @ts-ignore 
+              getlocalstorage?.bids?.length !== 0 ?  // @ts-ignore 
                 getlocalstorage?.bids?.map((ele) => (
                   <Stack>
                     <Text fontWeight={600} fontSize={"xl"}>{ele.name} ------- ₹ {ele.amount}</Text>

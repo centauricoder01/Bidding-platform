@@ -6,7 +6,7 @@ import { URL } from "../ApiURL";
 const GetAllBids = () => async (dispatch) => {
   dispatch({ type: types.GET_BID_REQUEST });
   return await axios
-    .get("http://localhost:8080/getbids")
+    .get(`${URL}/getbids`)
     .then((res) => {
       dispatch({
         type: types.GET_BID_SUCCESS,
@@ -66,6 +66,7 @@ const yourProduct = (value) => async (dispatch) => {
 //@ts-ignore
 const yourBid = (data) => async (dispatch) => {
   dispatch({ type: types.YOUR_BID_REQUEST });
+  console.log(data, "THIS IS Data")
   return axios
     .post(`${URL}/addbid`, data)
     .then((res) => {
@@ -73,7 +74,7 @@ const yourBid = (data) => async (dispatch) => {
         type: types.YOUR_BID_SUCCESS,
         payload: res.data,
       });
-      return res.data
+      console.log("This is res.data",res.data)
     })
     .catch((e) => {
       dispatch({

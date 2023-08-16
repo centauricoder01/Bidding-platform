@@ -18,10 +18,12 @@ import {
     useDisclosure,
     Input,
 } from '@chakra-ui/react'
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { yourBid } from '../Redux/Bids/Action';
+import { GetAllBids } from "../Redux/Bids/Action"
+
 
 
 
@@ -52,7 +54,7 @@ export default function Singlepro({ image, title, desc, time, bids, productId, p
         navigate("/singlepro")
     }
 
-    
+
     const HandleSubmit = () => {
         if (getBidValue < price) {
             return toast({
@@ -69,7 +71,7 @@ export default function Singlepro({ image, title, desc, time, bids, productId, p
                 value = false;
             }
         }
-       
+
         let obj = {
             userId: getuserId?.user._id, name: getuserId?.user.name, amount: getBidValue, productId: productId
         }
@@ -91,7 +93,8 @@ export default function Singlepro({ image, title, desc, time, bids, productId, p
             // @ts-ignore
             dispatch(yourBid(obj));
             onClose();
-            window.location.reload()
+            // @ts-ignore
+            dispatch(GetAllBids())
         }
     }
 

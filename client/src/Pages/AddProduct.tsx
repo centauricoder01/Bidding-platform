@@ -107,7 +107,7 @@ export default function AddBid() {
         }
         //@ts-ignore
         dispatch(AddProduct(formValues)).then((res) => {
-
+            
             if (res.message === "Bid saved") {
                 toast({
                     title: "Bidding start on Your Product",

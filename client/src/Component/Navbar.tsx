@@ -17,12 +17,14 @@ import { useEffect, useState } from 'react';
 import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs"
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+
 
 
 
 export default function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
-
+    const navigate = useNavigate();
     //@ts-ignore
     const value = useSelector(state => state.authReducer)
 
@@ -84,12 +86,13 @@ export default function Navbar() {
                                         <Link to={"/addprod"}>
                                             <MenuItem>Add Product</MenuItem>
                                         </Link>
-                                        <Link to={"/"}>
-                                            <MenuItem onClick={() => {
-                                                window.localStorage.clear();
-                                                window.location.reload()
-                                            }} >Logout</MenuItem>
-                                        </Link>
+
+                                        <MenuItem onClick={() => {
+                                            window.localStorage.clear();
+                                            // window.location.reload()
+                                            navigate("/")
+                                        }} >Logout</MenuItem>
+
                                     </MenuList>
                                 </Menu> : <Link to={"/signup"}>
                                     <Button>Signup</Button>
